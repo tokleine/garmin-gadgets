@@ -1,7 +1,26 @@
-<resources xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://developer.garmin.com/downloads/connect-iq/resources.xsd">
-    <layout id="Home">
-        <bitmap id="launcher" x="center" y="center" filename="../images/binocular.png"/>
-        <!-- <label text="Page Heading" x="10" y="25" font="Gfx.FONT_LARGE" color="Gfx.COLOR_BLACK" /> -->
-        <!-- <label text="Your information goes here." x="50%" y="50%" font="Gfx.FONT_MEDIUM" color="Gfx.COLOR_DK_GRAY" /> -->
-    </layout>
-</resources>
+<layout id="MainLayout">
+    <label
+        id="latitude"
+        text="Latitude: 53.123456"
+        x="center"
+        y="20%"
+        font="Gfx.FONT_SYSTEM_XTINY"
+        justification="Gfx.TEXT_JUSTIFY_CENTER"
+    />
+    <label
+        id="longitude"
+        text="Longitude: -1.234567"
+        x="center"
+        y="40%"
+        font="Gfx.FONT_SYSTEM_XTINY"
+        justification="Gfx.TEXT_JUSTIFY_CENTER"
+    />
+    <label
+        id="altitude"
+        text="Altitude: 100.0"
+        x="center"
+        y="60%"
+        font="Gfx.FONT_SYSTEM_XTINY"
+        justification="Gfx.TEXT_JUSTIFY_CENTER"
+    />
+</layout>

@@ -4,8 +4,13 @@ import Toybox.Position;
 using Toybox.System;
 using Toybox.Timer;
 import Toybox.Lang;
+import Toybox.Math;
 
 class HomeView extends WatchUi.View {
+
+    private var _latitudeElement;
+    private var _longitudeElement;
+    private var _altitudeElement;
 
     function initialize() {
         View.initialize();
@@ -13,7 +18,16 @@ class HomeView extends WatchUi.View {
 
     // Load your resources here
     function onLayout(dc as Dc) as Void {
-        // setLayout(Rez.Layouts.Home(dc));
+        setLayout(Rez.Layouts.MainLayout(dc));
+
+        _latitudeElement = findDrawableById("latitude");
+        _longitudeElement = findDrawableById("longitude");
+        _altitudeElement = findDrawableById("altitude");
+
+        setLatitude(_latitudeElement);
+        setLongitude(_longitudeElement);
+        setAltitude(_altitudeElement);
+
     }
 
     // Called when this View is brought to the foreground. Restore
@@ -24,31 +38,7 @@ class HomeView extends WatchUi.View {
 
     // Update the view
     function onUpdate(dc) {
-        var mockLocation = new Position.Location(
-            {
-                :latitude => 48.166592793362,
-                :longitude => 11.557854449248639,
-                :format => :degrees
-            }
-        );
-
-
-        // this is the real location data, will use it later
-        // var positionInfo = Position.getInfo();
-
-        // var loc = positionInfo.position.toDegrees();
-        var loc = mockLocation.toDegrees();
-        var mLatitude = format_to_6_decimals(loc[0]);
-        var mLongitude = format_to_6_decimals(loc[1]);
-
-        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(
-            dc.getWidth() / 2,                      // gets the width of the device and divides by 2
-            dc.getHeight() / 2,                     // gets the height of the device and divides by 2
-            Graphics.FONT_SYSTEM_XTINY,                    // sets the font size
-            "Latitude: " + mLatitude + "\n" + "Longitude: " + mLongitude, // sets the text to be displayed
-            Graphics.TEXT_JUSTIFY_CENTER            // sets the justification for the text
-        );
+        View.onUpdate(dc);
     }
 
     // Called when this View is removed from the screen. Save the
@@ -59,5 +49,18 @@ class HomeView extends WatchUi.View {
 
     function format_to_6_decimals(number) as Double {
         return number.format("%.6f");
+    }
+
+    function setLatitude(latitude) as Void {
+        _latitudeElement.setText("Latitude: " + latitude);
+        WatchUi.requestUpdate();
+    }
+    function setLongitude(longitude) as Void {
+        _longitudeElement.setText("Longitude: " + longitude);
+        WatchUi.requestUpdate();
+    }
+    function setAltitude(altitude) as Void {
+        _altitudeElement.setText("Altitude: " + altitude);
+        WatchUi.requestUpdate();
     }
 }

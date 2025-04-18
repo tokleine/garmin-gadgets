@@ -2,7 +2,8 @@ import Toybox.Application;
 import Toybox.Lang;
 import Toybox.WatchUi;
 
-class RoadTaggerAppApp extends Application.AppBase {
+class RoadTaggerApp extends Application.AppBase {
+    private var _view;
 
     function initialize() {
         AppBase.initialize();
@@ -18,11 +19,20 @@ class RoadTaggerAppApp extends Application.AppBase {
 
     // Return the initial view of your application here
     function getInitialView() as [Views] or [Views, InputDelegates] {
-        return [ new HomeView(), new HomeDelegate() ];
+        _view = new HomeView();
+        return [ _view, new HomeDelegate() ];
+    }
+
+    function getView() as View {
+        return _view;
     }
 
 }
 
-function getApp() as RoadTaggerAppApp {
-    return Application.getApp() as RoadTaggerAppApp;
+function getApp() as RoadTaggerApp {
+    return Application.getApp() as RoadTaggerApp;
+}
+
+function getView() as HomeView {
+    return Application.getApp().getView() as HomeView;
 }
