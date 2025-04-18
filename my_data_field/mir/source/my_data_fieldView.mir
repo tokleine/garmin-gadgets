@@ -1,0 +1,65 @@
+[ @file = "/Users/tobias/Projects/garmin/my_data_field/source/my_data_fieldView.mc"; @line = 1; @symbol_importdef<0> = [Toybox,1,7,13]; @symbol_importdef<1> = [Activity,1,14,22]; ]
+import Toybox.Activity;
+[ @file = "/Users/tobias/Projects/garmin/my_data_field/source/my_data_fieldView.mc"; @line = 2; @symbol_importdef<0> = [Toybox,2,7,13]; @symbol_importdef<1> = [Lang,2,14,18]; ]
+import Toybox.Lang;
+[ @file = "/Users/tobias/Projects/garmin/my_data_field/source/my_data_fieldView.mc"; @line = 3; @symbol_importdef<0> = [Toybox,3,7,13]; @symbol_importdef<1> = [Time,3,14,18]; ]
+import Toybox.Time;
+[ @file = "/Users/tobias/Projects/garmin/my_data_field/source/my_data_fieldView.mc"; @line = 4; @symbol_importdef<0> = [Toybox,4,7,13]; @symbol_importdef<1> = [WatchUi,4,14,21]; ]
+import Toybox.WatchUi;
+[ @file = "/Users/tobias/Projects/garmin/my_data_field/source/my_data_fieldView.mc"; @line = 7; @symbol_classdef = [my_data_fieldView,7,6,23]; @symbol_extends<0> = [WatchUi,7,32,39]; @symbol_extends<1> = [SimpleDataField,7,40,55]; ]
+class my_data_fieldView extends WatchUi.SimpleDataField {
+    [ @file = "/Users/tobias/Projects/garmin/my_data_field/source/my_data_fieldView.mc"; @line = 7; ]
+    <init> {
+    }
+    [ @file = "/Users/tobias/Projects/garmin/my_data_field/source/my_data_fieldView.mc"; @line = 7; ]
+    static
+    <init> {
+    }
+    [ @file = "/Users/tobias/Projects/garmin/my_data_field/source/my_data_fieldView.mc"; @line = 10; @symbol_functiondef = [initialize,10,13,23]; ]
+    function initialize() as Void {
+_Users_tobias_Projects_garmin_my_data_field_source_my_data_fieldView_mc_10_26_13_4_start:
+[ "/Users/tobias/Projects/garmin/my_data_field/source/my_data_fieldView.mc" 11 8 ]
+        symbol [ SimpleDataField %tmp.2 11 8 23 ];
+        %tmp.2 = getv ? :SimpleDataField;
+        symbol [ initialize %tmp.3 11 24 34 ];
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+[ "/Users/tobias/Projects/garmin/my_data_field/source/my_data_fieldView.mc" 12 8 ]
+        %tmp.4 = "seconds";
+        symbol [ label ? 12 8 13 ];
+        putv self :label %tmp.4;
+_Users_tobias_Projects_garmin_my_data_field_source_my_data_fieldView_mc_10_26_13_4_stop:
+    }
+    [ @file = "/Users/tobias/Projects/garmin/my_data_field/source/my_data_fieldView.mc"; @line = 19; @symbol_functiondef = [compute,19,13,20]; @symbol_param<0> = [info,19,21,25]; @symbol_param<0>_type<0> = [Activity,19,29,37]; @symbol_param<0>_type<1> = [Info,19,38,42]; @symbol_return<0> = [Numeric,19,47,54]; @symbol_return<1> = [Duration,19,58,66]; @symbol_return<2> = [String,19,70,76]; ]
+    function compute(info as Activity.Info) as Numeric or Duration or String or Null {
+_Users_tobias_Projects_garmin_my_data_field_source_my_data_fieldView_mc_19_85_24_4_start:
+[ "/Users/tobias/Projects/garmin/my_data_field/source/my_data_fieldView.mc" 21 8 ]
+        symbol [ System %tmp.2 21 8 14 ];
+        %tmp.2 = getv ? :System;
+        symbol [ println %tmp.3 21 15 22 ];
+        %tmp.3 = getv function %tmp.2 :println;
+        %tmp.4 = "compute() called";
+        invoke %tmp.2 %tmp.3(%tmp.4);
+[ "/Users/tobias/Projects/garmin/my_data_field/source/my_data_fieldView.mc" 22 8 ]
+        [ "_Users_tobias_Projects_garmin_my_data_field_source_my_data_fieldView_mc_19_85_24_4_start" "_Users_tobias_Projects_garmin_my_data_field_source_my_data_fieldView_mc_19_85_24_4_stop" ]
+        %time.1 = local;
+        symbol [ time %time.1 22 12 16 ];
+        symbol [ System %tmp.6 22 19 25 ];
+        %tmp.6 = getv ? :System;
+        symbol [ getClockTime %tmp.7 22 26 38 ];
+        %tmp.7 = getv function %tmp.6 :getClockTime;
+        %tmp.8 = invoke %tmp.6 %tmp.7();
+        symbol [ sec %tmp.9 22 41 44 ];
+        %tmp.9 = getv %tmp.8 :sec;
+        lputv %time.1 %tmp.9;
+        symbol [ time %time.1 22 12 16 ];
+[ "/Users/tobias/Projects/garmin/my_data_field/source/my_data_fieldView.mc" 23 8 ]
+        %tmp.10 = lgetv %time.1;
+        symbol [ time %tmp.10 23 15 19 ];
+        ret %tmp.10;
+_Users_tobias_Projects_garmin_my_data_field_source_my_data_fieldView_mc_19_85_24_4_stop:
+    }
+}
+[ @file = "/Users/tobias/Projects/garmin/my_data_field/source/my_data_fieldView.mc"; @line = 1; ]
+<init> {
+}
