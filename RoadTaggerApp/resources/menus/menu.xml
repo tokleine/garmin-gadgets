@@ -1,4 +1,6 @@
+<!-- filepath: /Users/tobias/Projects/garmin/RoadTaggerApp/resources/menus/menu.xml -->
 <menu id="MainMenu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://developer.garmin.com/downloads/connect-iq/resources.xsd">
-    <menu-item id="item_1" label="@Strings.menu_label_1" />
-    <menu-item id="item_2" label="@Strings.menu_label_2" />
+    <menu-item id="tag_good_road" label="@Strings.menu_label_good_road" />
+    <menu-item id="tag_bad_road" label="@Strings.menu_label_bad_road" />
+    <menu-item id="tag_good_view" label="@Strings.menu_label_good_view" />
 </menu>
