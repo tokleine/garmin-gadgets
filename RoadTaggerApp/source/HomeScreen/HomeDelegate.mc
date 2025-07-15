@@ -56,7 +56,7 @@ class HomeDelegate extends WatchUi.BehaviorDelegate {
             {
                 :latitude => getRandomLatitude(),
                 :longitude => getRandomLongitude(),
-                :altitude => 0.0,
+                :altitude => getRandomAltitude(),
                 :format => :degrees
             }
         );
@@ -64,8 +64,9 @@ class HomeDelegate extends WatchUi.BehaviorDelegate {
         // var mLatitude = format_to_6_decimals(loc[0]);
         // var mLongitude = format_to_6_decimals(loc[1]);
 
-        _view.setLatitude(loc[0]);
-        _view.setLongitude(loc[1]);
+        _view.setLatitude(format_to_6_decimals(loc[0]));
+        _view.setLongitude(format_to_6_decimals(loc[1]));
+        _view.setAltitude(format_to_6_decimals(getRandomAltitude()));
         _currentDuration--;
         System.println("Current duration: " + _currentDuration);
     }
@@ -96,5 +97,23 @@ class HomeDelegate extends WatchUi.BehaviorDelegate {
         var longitude = (normalized * 360.0) - 180.0;
         
         return longitude;
+    }
+
+    function getRandomAltitude() {
+        // Get random integer from 0 to 2^31-1
+        var randomInt = Math.rand();
+        
+        // Convert to float between 0.0 and 1.0
+        var normalized = randomInt / 2147483647.0;
+        
+        // Scale to range 0 to 10000 (total range of 10000)
+        var altitude = normalized * 100.0;
+        
+        return altitude;
+    }
+
+    function format_to_6_decimals(number) as String {
+        System.println(number.format("%11.6f"));
+        return number.format("%11.6f");
     }
 }

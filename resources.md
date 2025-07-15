@@ -1,4 +1,6 @@
 - https://developer.garmin.com/connect-iq/api-docs/
 - https://developer.garmin.com/connect-iq/connect-iq-basics/your-first-app/
 - https://developer.garmin.com/connect-iq/monkey-c/
+- https://github.com/aiMonster/Garmin-Shower-App-Tutorial/blob/master/source/ShowerTutorialView.mc
+- https://www.youtube.com/watch?v=MQ_5T7c1-lw
 - 
