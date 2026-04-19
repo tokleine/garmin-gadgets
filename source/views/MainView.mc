@@ -1,6 +1,5 @@
 using Toybox.WatchUi;
 using Toybox.Graphics;
-using Toybox.System;
 using Toybox.Application;
 
 class MainView extends WatchUi.View {
@@ -33,7 +32,8 @@ class MainView extends WatchUi.View {
         var segments = StorageManager.getSegments();
         dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
         dc.drawText(dc.getWidth() / 2, 200, Graphics.FONT_SMALL, "Segments: " + segments.size(), Graphics.TEXT_JUSTIFY_CENTER);
-        dc.drawText(dc.getWidth() / 2, 260, Graphics.FONT_XTINY, "ENTER: Start/Stop  MENU: List", Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(dc.getWidth() / 2, 260, Graphics.FONT_XTINY, "LAP: Start/Stop", Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(dc.getWidth() / 2, 280, Graphics.FONT_XTINY, "DOWN: View list", Graphics.TEXT_JUSTIFY_CENTER);
     }
 }
 
@@ -45,27 +45,47 @@ class MainViewDelegate extends WatchUi.InputDelegate {
         app = Application.getApp();
     }
 
+    // LAP and START buttons — primary recording toggle on Edge devices
     function onKey(keyEvent) {
         var key = keyEvent.getKey();
-
-        if (key == WatchUi.KEY_ENTER) {
-            if (app.getIsRecording()) {
-                var segment = app.stopRecording();
-                if (segment != null) {
-                    var rating_del = new RatingViewDelegate(segment);
-                    WatchUi.pushView(new RatingView(rating_del), rating_del, WatchUi.SLIDE_LEFT);
-                }
-            } else {
-                app.startRecording();
-                WatchUi.requestUpdate();
-            }
-            return true;
-        } else if (key == WatchUi.KEY_MENU) {
-            var list_view = new ListingsView();
-            WatchUi.pushView(list_view, new ListingsViewDelegate(list_view), WatchUi.SLIDE_LEFT);
+        if (key == WatchUi.KEY_LAP || key == WatchUi.KEY_START || key == WatchUi.KEY_ENTER) {
+            _toggleRecording();
             return true;
         }
-
         return false;
+    }
+
+    // DOWN button (nextPage behavior) — open segment list
+    function onNextPage() {
+        var list_view = new ListingsView();
+        WatchUi.pushView(list_view, new ListingsViewDelegate(list_view), WatchUi.SLIDE_UP);
+        return true;
+    }
+
+    // UP button (previousPage behavior) — no-op on main screen
+    function onPreviousPage() {
+        return true;
+    }
+
+    // Long-press menu — open segment list
+    function onMenu() {
+        var list_view = new ListingsView();
+        WatchUi.pushView(list_view, new ListingsViewDelegate(list_view), WatchUi.SLIDE_LEFT);
+        return true;
+    }
+
+    private function _toggleRecording() {
+        if (app.getIsRecording()) {
+            var segment = app.stopRecording();
+            if (segment != null) {
+                var rating_del = new RatingViewDelegate(segment);
+                WatchUi.pushView(new RatingView(rating_del), rating_del, WatchUi.SLIDE_LEFT);
+            } else {
+                WatchUi.requestUpdate();
+            }
+        } else {
+            app.startRecording();
+            WatchUi.requestUpdate();
+        }
     }
 }
