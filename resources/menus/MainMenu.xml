@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <menu id="MainMenu">
-    <menu-item id="item_list" label="@string/button_list"/>
+    <menu-item id="item_list" label="@Strings.button_list"/>
 </menu>

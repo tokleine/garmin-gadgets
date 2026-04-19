@@ -2,40 +2,37 @@ using Toybox.Application;
 using Toybox.WatchUi;
 using Toybox.System;
 using Toybox.Position;
+using Toybox.Time;
 
 class RoadRater extends Application.AppBase {
     var is_recording = false;
     var recording_start_lat = null;
     var recording_start_lon = null;
     var recording_start_time = null;
-    var gps_enabled = false;
 
     function initialize() {
         AppBase.initialize();
     }
 
     function onStart(state) {
-        if (Position.enableLocationEvents(Position.LOCATION_CONTINUOUS, method(:onPosition))) {
-            gps_enabled = true;
-        }
+        Position.enableLocationEvents(Position.LOCATION_CONTINUOUS, method(:onPosition));
     }
 
     function onStop(state) {
-        if (gps_enabled) {
-            Position.enableLocationEvents(Position.LOCATION_CONTINUOUS, null);
-        }
+        Position.enableLocationEvents(Position.LOCATION_DISABLE, method(:onPosition));
     }
 
     function getInitialView() {
-        return [ new MainView() ];
+        var view = new MainView();
+        return [ view, new MainViewDelegate() ];
     }
 
-    function onPosition(info) {
-        if (info != null && is_recording) {
+    function onPosition(info as Position.Info) as Void {
+        if (info != null && is_recording && info.accuracy != Position.QUALITY_NOT_AVAILABLE) {
             if (recording_start_lat == null) {
-                recording_start_lat = info.latitude;
-                recording_start_lon = info.longitude;
-                recording_start_time = System.getClockTime().value;
+                recording_start_lat = info.position.toDegrees()[0];
+                recording_start_lon = info.position.toDegrees()[1];
+                recording_start_time = Time.now().value();
             }
         }
     }
@@ -50,7 +47,8 @@ class RoadRater extends Application.AppBase {
     function stopRecording() {
         is_recording = false;
         if (recording_start_lat != null && recording_start_lon != null) {
-            return new Segment(recording_start_lat, recording_start_lon, System.getClockTime().value, null);
+            var ts = (recording_start_time != null) ? recording_start_time : Time.now().value();
+            return new Segment(recording_start_lat, recording_start_lon, ts, null);
         }
         return null;
     }

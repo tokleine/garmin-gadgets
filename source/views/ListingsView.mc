@@ -2,8 +2,8 @@ using Toybox.WatchUi;
 using Toybox.Graphics;
 
 class ListingsView extends WatchUi.View {
-    private var segments;
-    private var selected_index = 0;
+    var segments;
+    var selected_index = 0;
 
     function initialize() {
         View.initialize();
@@ -53,24 +53,26 @@ class ListingsView extends WatchUi.View {
 }
 
 class ListingsViewDelegate extends WatchUi.InputDelegate {
-    private var view;
+    private var _view;
 
-    function initialize() {
+    function initialize(listing_view) {
         InputDelegate.initialize();
-        view = null;
+        _view = listing_view;
     }
 
     function onKey(keyEvent) {
         var key = keyEvent.getKey();
 
         if (key == WatchUi.KEY_UP) {
-            if (view != null && view.selected_index > 0) {
-                view.selected_index--;
+            if (_view.selected_index > 0) {
+                _view.selected_index--;
+                WatchUi.requestUpdate();
             }
             return true;
         } else if (key == WatchUi.KEY_DOWN) {
-            if (view != null && view.selected_index < view.segments.size() - 1) {
-                view.selected_index++;
+            if (_view.selected_index < _view.segments.size() - 1) {
+                _view.selected_index++;
+                WatchUi.requestUpdate();
             }
             return true;
         } else if (key == WatchUi.KEY_ESC) {

@@ -2,12 +2,11 @@ using Toybox.WatchUi;
 using Toybox.Graphics;
 
 class RatingView extends WatchUi.View {
-    private var segment;
-    private var selected_rating = null;
+    private var _delegate;
 
-    function initialize(seg) {
+    function initialize(del) {
         View.initialize();
-        segment = seg;
+        _delegate = del;
     }
 
     function onLayout(dc) {
@@ -20,36 +19,47 @@ class RatingView extends WatchUi.View {
         dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
         dc.drawText(dc.getWidth() / 2, 50, Graphics.FONT_MEDIUM, "Rate Segment", Graphics.TEXT_JUSTIFY_CENTER);
 
-        var nice_color = (selected_rating == "nice") ? Graphics.COLOR_GREEN : Graphics.COLOR_BLACK;
-        var bad_color = (selected_rating == "bad") ? Graphics.COLOR_RED : Graphics.COLOR_BLACK;
-
-        dc.setColor(nice_color, Graphics.COLOR_WHITE);
-        dc.drawText(dc.getWidth() / 4, 150, Graphics.FONT_MEDIUM, "NICE", Graphics.TEXT_JUSTIFY_CENTER);
-
-        dc.setColor(bad_color, Graphics.COLOR_WHITE);
-        dc.drawText(3 * dc.getWidth() / 4, 150, Graphics.FONT_MEDIUM, "BAD", Graphics.TEXT_JUSTIFY_CENTER);
+        if (_delegate.selected_rating.equals("nice")) {
+            dc.setColor(Graphics.COLOR_GREEN, Graphics.COLOR_WHITE);
+        } else {
+            dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_WHITE);
+        }
+        dc.drawText(dc.getWidth() / 2, 130, Graphics.FONT_LARGE, _delegate.selected_rating.toUpper(), Graphics.TEXT_JUSTIFY_CENTER);
 
         dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
-        dc.drawText(dc.getWidth() / 2, 250, Graphics.FONT_XTINY, "Select with UP/DOWN", Graphics.TEXT_JUSTIFY_CENTER);
-        dc.drawText(dc.getWidth() / 2, 270, Graphics.FONT_XTINY, "Confirm with ENTER", Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(dc.getWidth() / 2, 230, Graphics.FONT_XTINY, "UP/DOWN: toggle", Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(dc.getWidth() / 2, 250, Graphics.FONT_XTINY, "ENTER: confirm", Graphics.TEXT_JUSTIFY_CENTER);
     }
 }
 
 class RatingViewDelegate extends WatchUi.InputDelegate {
-    private var view;
+    var selected_rating = "nice";
+    private var _segment;
 
-    function initialize() {
+    function initialize(segment) {
         InputDelegate.initialize();
+        _segment = segment;
     }
 
     function onKey(keyEvent) {
         var key = keyEvent.getKey();
 
-        if (key == WatchUi.KEY_UP) {
-            return true;
-        } else if (key == WatchUi.KEY_DOWN) {
+        if (key == WatchUi.KEY_UP || key == WatchUi.KEY_DOWN) {
+            if (selected_rating.equals("nice")) {
+                selected_rating = "bad";
+            } else {
+                selected_rating = "nice";
+            }
+            WatchUi.requestUpdate();
             return true;
         } else if (key == WatchUi.KEY_ENTER) {
+            if (_segment != null) {
+                _segment.rating = selected_rating;
+                StorageManager.addSegment(_segment);
+            }
+            WatchUi.popView(WatchUi.SLIDE_RIGHT);
+            return true;
+        } else if (key == WatchUi.KEY_ESC) {
             WatchUi.popView(WatchUi.SLIDE_RIGHT);
             return true;
         }
