@@ -46,11 +46,10 @@ class RoadRater extends Application.AppBase {
 
     function stopRecording() {
         is_recording = false;
-        if (recording_start_lat != null && recording_start_lon != null) {
-            var ts = (recording_start_time != null) ? recording_start_time : Time.now().value();
-            return new Segment(recording_start_lat, recording_start_lon, ts, null);
-        }
-        return null;
+        var lat = (recording_start_lat != null) ? recording_start_lat : 0.0;
+        var lon = (recording_start_lon != null) ? recording_start_lon : 0.0;
+        var ts = (recording_start_time != null) ? recording_start_time : Time.now().value();
+        return new Segment(lat, lon, ts, null);
     }
 
     function getIsRecording() {

@@ -45,10 +45,10 @@ class MainViewDelegate extends WatchUi.InputDelegate {
         app = Application.getApp();
     }
 
-    // LAP and START buttons — primary recording toggle on Edge devices
+    // On Edge 540, the physical LAP button sends KEY_ESC (5), not KEY_LAP (19)
     function onKey(keyEvent) {
         var key = keyEvent.getKey();
-        if (key == WatchUi.KEY_LAP || key == WatchUi.KEY_START || key == WatchUi.KEY_ENTER) {
+        if (key == WatchUi.KEY_ESC || key == WatchUi.KEY_LAP || key == WatchUi.KEY_START || key == WatchUi.KEY_ENTER) {
             _toggleRecording();
             return true;
         }
