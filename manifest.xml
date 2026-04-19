@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iq:manifest version="3" xmlns:iq="http://www.garmin.com/xml/connectiq">
+    <iq:application entry="RoadRater"
+                    id="6f5d8c3a-2e1f-4b7c-9d0e-1a2b3c4d5e6f"
+                    launcherIcon="@drawable/ic_launcher"
+                    minSdkVersion="6.0"
+                    name="@string/app_name"
+                    type="widget"
+                    version="1.0.0">
+
+        <iq:products>
+            <iq:product id="edge540"/>
+        </iq:products>
+
+        <iq:permissions>
+            <iq:uses-permission id="Positioning"/>
+        </iq:permissions>
+
+        <iq:languages>
+            <iq:language>eng</iq:language>
+        </iq:languages>
+    </iq:application>
+</iq:manifest>

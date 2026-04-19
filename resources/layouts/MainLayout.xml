@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout id="MainLayout">
+    <label x="center" y="50" text="@string/app_name" font="Gfx.FONT_LARGE" justification="Gfx.TEXT_JUSTIFY_CENTER"/>
+</layout>

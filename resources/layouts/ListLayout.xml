@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout id="ListLayout">
+    <label x="center" y="20" text="@string/segments" font="Gfx.FONT_MEDIUM" justification="Gfx.TEXT_JUSTIFY_CENTER"/>
+</layout>
