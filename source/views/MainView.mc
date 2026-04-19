@@ -37,11 +37,11 @@ class MainView extends WatchUi.View {
     }
 }
 
-class MainViewDelegate extends WatchUi.InputDelegate {
+class MainViewDelegate extends WatchUi.BehaviorDelegate {
     private var app;
 
     function initialize() {
-        InputDelegate.initialize();
+        BehaviorDelegate.initialize();
         app = Application.getApp();
     }
 

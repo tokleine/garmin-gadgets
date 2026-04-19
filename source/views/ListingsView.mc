@@ -59,11 +59,11 @@ class ListingsView extends WatchUi.View {
     }
 }
 
-class ListingsViewDelegate extends WatchUi.InputDelegate {
+class ListingsViewDelegate extends WatchUi.BehaviorDelegate {
     private var _view;
 
     function initialize(listing_view) {
-        InputDelegate.initialize();
+        BehaviorDelegate.initialize();
         _view = listing_view;
     }
 

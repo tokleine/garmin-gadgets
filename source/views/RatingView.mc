@@ -33,12 +33,12 @@ class RatingView extends WatchUi.View {
     }
 }
 
-class RatingViewDelegate extends WatchUi.InputDelegate {
+class RatingViewDelegate extends WatchUi.BehaviorDelegate {
     var selected_rating = "nice";
     private var _segment;
 
     function initialize(segment) {
-        InputDelegate.initialize();
+        BehaviorDelegate.initialize();
         _segment = segment;
     }
 
