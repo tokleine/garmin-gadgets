@@ -1,1 +1,24 @@
 .auth/*
+
+# Build artifacts
+bin/
+build/
+dist/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS-specific files
+Thumbs.db
+
+# SDK and tool files
+connectiq-sdk/
+
+# Compiled output
+*.prg
+*.bin

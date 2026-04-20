@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<strings>
+    <string id="app_name">Road Rater</string>
+    <string id="button_start">Start</string>
+    <string id="button_stop">Stop</string>
+    <string id="button_nice">Nice</string>
+    <string id="button_bad">Bad</string>
+    <string id="button_list">List</string>
+    <string id="status_recording">Recording</string>
+    <string id="status_ready">Ready</string>
+    <string id="rate_segment">Rate Segment</string>
+    <string id="segments">Segments</string>
+    <string id="no_segments">No segments recorded</string>
+</strings>
